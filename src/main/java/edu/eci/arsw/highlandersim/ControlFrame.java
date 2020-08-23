@@ -20,6 +20,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import java.awt.Color;
+import java.util.concurrent.atomic.AtomicInteger;
 import javax.swing.JScrollBar;
 
 public class ControlFrame extends JFrame {
@@ -88,17 +89,17 @@ public class ControlFrame extends JFrame {
         btnPauseAndCheck.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
 
-                /*
-				 * COMPLETAR
-                 */
                 int sum = 0;
                 for (Immortal im : immortals) {
-                    sum += im.getHealth();
+                    im.halt();
+                    //sum += im.getHealth();
                 }
-
+                for (Immortal im : immortals) {
+                    //im.halt();
+                    sum += im.getHealth().get();
+                }
                 statisticsLabel.setText("<html>"+immortals.toString()+"<br>Health sum:"+ sum);
-                
-                
+                //System.out.println("<html>"+immortals.toString()+"<br>Health sum:"+ sum);
 
             }
         });
@@ -111,7 +112,9 @@ public class ControlFrame extends JFrame {
                 /**
                  * IMPLEMENTAR
                  */
-
+                for (Immortal im : immortals) {
+                    im.restart();
+                }
             }
         });
 
@@ -145,14 +148,14 @@ public class ControlFrame extends JFrame {
     public List<Immortal> setupInmortals() {
 
         ImmortalUpdateReportCallback ucb=new TextAreaUpdateReportCallback(output,scrollPane);
-        
+
         try {
             int ni = Integer.parseInt(numOfImmortals.getText());
 
             List<Immortal> il = new LinkedList<Immortal>();
 
             for (int i = 0; i < ni; i++) {
-                Immortal i1 = new Immortal("im" + i, il, DEFAULT_IMMORTAL_HEALTH, DEFAULT_DAMAGE_VALUE,ucb);
+                Immortal i1 = new Immortal("im" + i, il, new AtomicInteger(DEFAULT_IMMORTAL_HEALTH), DEFAULT_DAMAGE_VALUE,ucb);
                 il.add(i1);
             }
             return il;
