@@ -1,0 +1,2 @@
+Punto 10:
+A medida que los inmortales mueran deben ser eliminados de la lista ya que allí se presenta una condición de carrera cuando los inmortales quieren pelear con uno que ya ha muerto.
