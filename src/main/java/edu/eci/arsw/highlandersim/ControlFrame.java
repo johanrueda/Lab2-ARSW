@@ -93,14 +93,11 @@ public class ControlFrame extends JFrame {
                 int sum = 0;
                 for (Immortal im : immortals) {
                     im.halt();
-                    //sum += im.getHealth();
                 }
                 for (Immortal im : immortals) {
-                    //im.halt();
                     sum += im.getHealth().get();
                 }
                 statisticsLabel.setText("<html>" + immortals.toString() + "<br>Health sum:" + sum);
-                //System.out.println("<html>"+immortals.toString()+"<br>Health sum:"+ sum);
 
             }
         });
@@ -197,14 +194,13 @@ class TextAreaUpdateReportCallback implements ImmortalUpdateReportCallback {
     @Override
     public void processReport(String report) {
         ta.append(report);
-
         //move scrollbar to the bottom
         javax.swing.SwingUtilities.invokeLater(new Runnable() {
-                                                   public void run() {
-                                                       JScrollBar bar = jsp.getVerticalScrollBar();
-                                                       bar.setValue(bar.getMaximum());
-                                                   }
-                                               }
+               public void run() {
+                   JScrollBar bar = jsp.getVerticalScrollBar();
+                   bar.setValue(bar.getMaximum());
+               }
+           }
         );
 
     }
