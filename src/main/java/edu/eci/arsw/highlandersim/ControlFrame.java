@@ -2,8 +2,6 @@ package edu.eci.arsw.highlandersim;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
-import java.util.LinkedList;
-import java.util.List;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -79,9 +77,7 @@ public class ControlFrame extends JFrame {
                         im.start();
                     }
                 }
-
                 btnStart.setEnabled(false);
-
             }
         });
         toolBar.add(btnStart);
@@ -89,7 +85,6 @@ public class ControlFrame extends JFrame {
         JButton btnPauseAndCheck = new JButton("Pause and check");
         btnPauseAndCheck.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-
                 int sum = 0;
                 for (Immortal im : immortals) {
                     im.halt();
@@ -98,9 +93,9 @@ public class ControlFrame extends JFrame {
                     sum += im.getHealth().get();
                 }
                 statisticsLabel.setText("<html>" + immortals.toString() + "<br>Health sum:" + sum);
-
             }
         });
+
         toolBar.add(btnPauseAndCheck);
 
         JButton btnResume = new JButton("Resume");
